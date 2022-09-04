@@ -1,0 +1,14 @@
+image: comp1531/basic:latest
+
+cache:
+  paths:
+    - node_modules
+
+stages:
+  - pipeline
+
+pipeline:
+  stage: pipeline
+  script:
+    - npm install
+    - npm test
