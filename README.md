@@ -286,7 +286,7 @@ Restart the site on alwaysdata and repeat the process until the server is starte
 If your server can both run locally *and* when you `SSH` into `alwaysdata`
 but still results in "Connection to upstream failed" when accessing the deployed site, here are some common issues to look into:
 
-1. Not having `ts-node` in (only) the list of `dependencies` in your [package.json](package.json):
+1. Not having `ts-node` in (only) the list of `dependencies` in your lab05_forum's `package.json`.
     - This package is necessary to start the server
     - Another common issue is having `ts-node` in both `dependencies` *and* `devDependencies`- it should only be in `dependencies`.
 
