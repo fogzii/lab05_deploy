@@ -10,7 +10,7 @@ Week 5 Saturday 10:00 pm AEST
 
 1. It is possible to complete this lab without finishing `lab05_forum` - you can simply deploy the starter code in `lab05_forum`, as the only routes we will assess are the root (`/`) and echo (`/echo/echo`). However, you should still clone and install the necessary packages as per the instructions in `lab05_forum` before attempting `lab05_deploy`.
 
-1. Although it is not a requirement that you deploy to Alwaysdata in this lab, we recommend doing so as you will receive the most support from our staff this way.
+1. Although it is not a requirement that you deploy to alwaysdata in this lab, we recommend doing so as you will receive the most support from our staff this way.
 
 ## Background
 
@@ -52,20 +52,20 @@ An image guide is available for some of the instructions below. You can toggle t
 Additionally, a video demonstration of the deploying process is available here:
 - https://www.youtube.com/watch?v=TgVzcMc-aMw
 
-Make sure to also read the tips given by Alwaysdata as you progress through the lab. **Don't just blindly follow the instructions given**, as there will be inputs that you will need to modify accordingly for your needs.
+Make sure to also read the tips given by alwaysdata as you progress through the lab. **Don't just blindly follow the instructions given**, as there will be inputs that you will need to modify accordingly for your needs.
 
-### Alwaysdata Registration
+### alwaysdata Registration
 
-Visit https://admin.alwaysdata.com/register and create a new Alwaysdata account (use any valid email address).
+Visit https://admin.alwaysdata.com/register and create a new alwaysdata account (use any valid email address).
 
 Upon registration, you will be prompted to enter a `Name` that determines the address of your sites, which can be anything you want (although avoid using your zID in the `Name` here - this will come later) - in this guide, we will be using the name `"anythingyouwant"`.
 
 A few things to note:
 
-1. Alwaysdata policy only allows one free account per user, so avoid registering more than once (i.e. don't make another account for your major project) as you may risk having all your accounts suspended. It is possible to host more than one site per account by appending a different path to the base URL.
-1. You should **NOT** need a credit card to create a free account, although you may be prompted to enter one due to either your location or IP address. If this is the case, we recommend you instead create an Alwaysdata account using Firefox inside VLAB (either by [downloading tigervnc](https://taggi.cse.unsw.edu.au/Vlab/) or through the [browser link](https://vlabgateway.cse.unsw.edu.au/)).
+1. alwaysdata policy only allows one free account per user, so avoid registering more than once (i.e. don't make another account for your major project) as you may risk having all your accounts suspended. It is possible to host more than one site per account by appending a different path to the base URL.
+1. You should **NOT** need a credit card to create a free account, although you may be prompted to enter one due to either your location or IP address. If this is the case, we recommend you instead create an alwaysdata account using Firefox inside VLAB (either by [downloading tigervnc](https://taggi.cse.unsw.edu.au/Vlab/) or through the [browser link](https://vlabgateway.cse.unsw.edu.au/)).
     <details close>
-    <summary>VLAB Firefox Alwaysdata Registration Image Guide</summary>
+    <summary>VLAB Firefox alwaysdata Registration Image Guide</summary>
 
     ![1.1](images/1.1.alwaysdata-signup.png)
 
@@ -178,7 +178,7 @@ A few things to note:
 
     </details>
 
-1. You can enter a different password for SSH if you wish, otherwise, leave it blank to use the same one as your Alwaysdata account.
+1. You can enter a different password for SSH if you wish, otherwise, leave it blank to use the same one as your alwaysdata account.
 
 1. Tick `Enable password login` and click `Submit`.
     <details close>
@@ -188,7 +188,7 @@ A few things to note:
 
     </details>
 
-### Deploying to Alwaysdata
+### Deploying to alwaysdata
 
 A reminder that you should be deploying from lab05_forum's repository, **not** lab05_deploy.
 
@@ -198,7 +198,7 @@ For the upcoming steps, we will assume that the `SSH_HOST` is `ssh-anythingyouwa
     ```shell
     $ ssh-copy-id USERNAME@SSH_HOST
     ```
-    For example, using the credentials in this guide (you should modify as appropriate):
+    For example, using the credentials in this guide (you should modify them as appropriate):
     ```shell
     $ ssh-copy-id anythingyouwant@ssh-anythingyouwant.alwaysdata.net
     ```
@@ -279,13 +279,32 @@ Make the necessary modifications to your code locally to fix the crash, then red
 ```sh
 $ bash deploy.sh
 ```
-Restart the site on Alwaysdata and repeat the process until the server is started successfully.
+Restart the site on alwaysdata and repeat the process until the server is started successfully.
+
+##### Other Common Deployment Errors 
+
+If your server can both run locally *and* when you `SSH` into `alwaysdata`
+but still results in "Connection to upstream failed" when accessing the deployed site, here are some common issues to look into:
+
+1. Not having `ts-node` in (only) the list of `dependencies` in your [package.json](package.json):
+    - This package is necessary to start the server
+    - Another common issue is having `ts-node` in both `dependencies` *and* `devDependencies`- it should only be in `dependencies`.
+
+1. Specifying `localhost` or `127.0.0.1` as the `HOST`/`IP` when starting the server. For example, rather than
+    ```js
+    const server = app.listen(PORT, () => { // ✅
+    ```
+    you have:
+    ```js
+    const server = app.listen(PORT, '127.0.0.1', () => { // ❌ 
+    ```
+    To resolve this for deployment, either remove the `HOST`/`IP` argument or use `process.env.IP` and supply an `IP` environment variable when working locally.
 
 ### Testing and Submitting your DEPLOYED_URL
 
 To submit your deploy URL, `cd` back into the `lab05_deploy` repository.
 
-1. Open [src/deploy.ts](src/deploy.ts) and modify the `DEPLOYED_URL` to your new deployed site, e.g. https://anythingyouwant.alwaysdata.net/z5555555-forum. A reminder that the `DEPLOYED_URL` must contain your zID exactly once.
+1. Open [src/deploy.ts](src/deploy.ts) and modify the `DEPLOYED_URL` to your newly deployed site, e.g. https://anythingyouwant.alwaysdata.net/z5555555-forum. A reminder that the `DEPLOYED_URL` must contain your zID exactly once.
 
 1. Open [src/deploy.test.ts](src/deploy.test.ts) and uncomment the given tests. Ensure that the tests pass locally.
 
@@ -297,16 +316,15 @@ To submit your deploy URL, `cd` back into the `lab05_deploy` repository.
 
 1. Before seeking help, make sure to re-check all the debugging/troubleshooting tips provided.
 1. When posting on our COMP1531 Ed forums for support, please include screenshots of:
-    - The output when you `ssh` into Alwaysdata, `cd` into the correct directory and manually run the server with `npm run ts-node src/server`
-    - Your full Alwaysdata configuration
+    - The output when you `ssh` into alwaysdata, `cd` into the correct directory and manually run the server with `npm run ts-node src/server`
+    - Your full alwaysdata configuration
     - The output of all relevant log files
-    - The error message when visiting your `DEPLOYED_URL`. Don't forget to restart your application on Alwaysdata and refresh the `DEPLOYED_URL` page.
+    - The error message when visiting your `DEPLOYED_URL`. Don't forget to restart your application on alwaysdata and refresh the `DEPLOYED_URL` page.
 1. The process will be similar if you wish to deploy another server, e.g. for your major project. Simply install a new application and append a different path that follows the base URL, e.g. `/w14a_potatoes` in:
     ```
     anythingyouwant.alwaysdata.net/w14a_potatoes
     ```
-    
-    A reminder to not create more than one free account to avoid violating Alwaysdata policy, which could lead to all your accounts being suspended.
+    A reminder to not create more than one free account to avoid violating alwaysdata policy, which could lead to all your accounts being suspended.
 
 ## Submission
 
