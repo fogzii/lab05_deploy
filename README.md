@@ -54,18 +54,18 @@ Additionally, a video demonstration of the deploying process is available here:
 
 Make sure to also read the tips given by alwaysdata as you progress through the lab. **Don't just blindly follow the instructions given**, as there will be inputs that you will need to modify accordingly for your needs.
 
-### alwaysdata Registration
+### Alwaysdata Registration
 
-Visit https://admin.alwaysdata.com/register and create a new alwaysdata account (use any valid email address).
+Visit https://www.alwaysdata.com/register and create a new alwaysdata account (use any valid email address).
 
 Upon registration, you will be prompted to enter a `Name` that determines the address of your sites, which can be anything you want (although avoid using your zID in the `Name` here - this will come later) - in this guide, we will be using the name `"anythingyouwant"`.
 
 A few things to note:
 
-1. alwaysdata policy only allows one free account per user, so avoid registering more than once (i.e. don't make another account for your major project) as you may risk having all your accounts suspended. It is possible to host more than one site per account by appending a different path to the base URL.
+1. Alwaysdata policy only allows one free account per user, so avoid registering more than once (i.e. don't make another account for your major project) as you may risk having all your accounts suspended. It is possible to host more than one site per account by appending a different path to the base URL.
 1. You should **NOT** need a credit card to create a free account, although you may be prompted to enter one due to either your location or IP address. If this is the case, we recommend you instead create an alwaysdata account using Firefox inside VLAB (either by [downloading tigervnc](https://taggi.cse.unsw.edu.au/Vlab/) or through the [browser link](https://vlabgateway.cse.unsw.edu.au/)).
     <details close>
-    <summary>VLAB Firefox alwaysdata Registration Image Guide</summary>
+    <summary>VLAB Firefox Alwaysdata Registration Image Guide</summary>
 
     ![1.1](images/1.1.alwaysdata-signup.png)
 
@@ -188,7 +188,7 @@ A few things to note:
 
     </details>
 
-### Deploying to alwaysdata
+### Deploying to Alwaysdata
 
 A reminder that you should be deploying from lab05_forum's repository, **not** lab05_deploy.
 
